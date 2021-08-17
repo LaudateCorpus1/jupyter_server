@@ -1851,7 +1851,7 @@ class ServerApp(JupyterApp):
         """
         # Create an instance of the ExtensionManager.
         self.extension_manager = ExtensionManager(log=self.log)
-        self.extension_manager.from_jpserver_extensions(self.jpserver_extensions)
+        self.extension_manager.from_jpserver_extensions(self.jpserver_extensions, self)
         self.extension_manager.link_all_extensions(self)
 
     def load_server_extensions(self):

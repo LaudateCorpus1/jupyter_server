@@ -327,12 +327,12 @@ class ExtensionManager(LoggingConfigurable):
         jpserver_extensions = config_manager.get_jpserver_extensions()
         self.from_jpserver_extensions(jpserver_extensions)
 
-    def from_jpserver_extensions(self, jpserver_extensions):
+    def from_jpserver_extensions(self, jpserver_extensions, serverapp):
         """Add extensions from 'jpserver_extensions'-like dictionary."""
         for name, enabled in jpserver_extensions.items():
-            self.add_extension(name, enabled=enabled)
+            self.add_extension(name, serverapp, enabled=enabled)
 
-    def add_extension(self, extension_name, enabled=False):
+    def add_extension(self, extension_name, serverapp, enabled=False):
         """Try to add extension to manager, return True if successful.
         Otherwise, return False.
         """
@@ -342,6 +342,8 @@ class ExtensionManager(LoggingConfigurable):
             return True
         # Raise a warning if the extension cannot be loaded.
         except Exception as e:
+            if serverapp.reraise_server_extension_failures:
+                raise
             self.log.warning(e)
         return False
 
