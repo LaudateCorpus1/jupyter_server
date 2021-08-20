@@ -156,7 +156,7 @@ async def test_culling(jp_server_config, jp_fetch):
     last_activity = term['last_activity']
 
     culled = False
-    for i in range(10):  # Culling should occur in a few seconds
+    for i in range(CULL_TIMEOUT + CULL_INTERVAL):
         try:
             resp = await jp_fetch(
                 'api', 'terminals', term_1,
