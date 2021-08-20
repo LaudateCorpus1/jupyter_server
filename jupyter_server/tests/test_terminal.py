@@ -28,7 +28,7 @@ def terminal_path(tmp_path):
     shutil.rmtree(str(subdir), ignore_errors=True)
 
 
-CULL_TIMEOUT = 2
+CULL_TIMEOUT = 10
 CULL_INTERVAL = 3
 
 
